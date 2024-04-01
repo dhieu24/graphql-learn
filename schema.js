@@ -3,18 +3,22 @@ export const typeDefs = `#graphql
         id: ID!
         title: String!
         platform: [String!]!
+        reviews: [Review!]
     }
 
     type Review{
         id: ID!
         rating: Int!
         content: String!
+        author: Author!
+        game: Game!
     }
 
     type Author{
         id: ID!
         name: String!
         verified: Boolean!
+        reviews: [Review!]
     }
 
     type Query{
@@ -24,6 +28,16 @@ export const typeDefs = `#graphql
         game(id: ID!): Game
         authors: [Author]
         author(id: ID!): Author
+    }
+
+    type Mutation{
+        deleteGame(id: ID!): [Game]
+        addGame(game: AddGameInput!): Game
+    }
+    
+    input AddGameInput{
+        title: String!
+        platform: [String!]
     }
 `
 
